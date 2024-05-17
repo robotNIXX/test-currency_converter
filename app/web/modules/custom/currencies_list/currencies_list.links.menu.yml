@@ -1,0 +1,13 @@
+currencies_list.settings:
+  title: 'Api Key'
+  route_name: currencies_list.settings.config
+  parent: system.admin_config_currencies_list
+currencies_list.currencies:
+  title: 'Available currencies'
+  route_name: currencies_list.settings.currencies
+  parent: system.admin_config_currencies_list
+system.admin_config_currencies_list:
+  route_name: system.admin_config_currencies_list
+  parent: system.admin_config
+  title: 'Currencies list'
+  weight: -10

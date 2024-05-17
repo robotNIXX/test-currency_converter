@@ -1,0 +1,23 @@
+currencies_list.settings.config:
+  path: '/admin/config/currencies_list/config'
+  defaults:
+    _form: Drupal\currencies_list\Forms\AdminCurrenciesForm
+    _title: Api key
+  requirements:
+    _permission: 'administer site configuration'
+
+currencies_list.settings.currencies:
+  path: '/admin/config/currencies_list/currencies'
+  defaults:
+    _form: Drupal\currencies_list\Forms\AdminCurrenciesListForm
+    _title: List of available currencies
+  requirements:
+    _permission: 'administer site configuration'
+
+system.admin_config_currencies_list:
+  path: '/admin/config/currencies_list'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Currencies List'
+  requirements:
+    _permission: 'access administration pages'

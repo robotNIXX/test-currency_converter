@@ -1,0 +1,5 @@
+currencies_list.admin.config:
+  title: 'Currencies List'
+  base_route_name: currencies_list.admin.config
+  names:
+    - currencies_list.settings

@@ -1,0 +1,12 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+function currencies_list_help(string $route_name, RouteMatchInterface $route_match) {
+    switch ($route_name) {
+        case 'help.page.currencies_list':
+            $output = "<h3>" . t('Currencies list module help') . "</h3>";
+            return $output;
+        default:
+    }
+}
