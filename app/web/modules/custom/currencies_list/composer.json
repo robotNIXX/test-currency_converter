@@ -2,5 +2,8 @@
     "name": "abaranov/currencies_list",
     "type": "drupal-custom-module",
     "description": "",
-    "keywords": ["Drupal"]
+    "keywords": ["Drupal"],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }
 }

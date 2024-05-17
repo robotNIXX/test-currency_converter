@@ -3,6 +3,8 @@
 namespace Drupal\currencies_list\Forms;
 
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\currencies_list\Services\CurrenciesApiService;
 
 class AdminCurrenciesListForm extends ConfigFormBase
 {
@@ -32,5 +34,40 @@ class AdminCurrenciesListForm extends ConfigFormBase
     public function getFormId()
     {
         return 'admin_currencies_list_form';
+    }
+
+    public function buildForm(array $form, FormStateInterface $form_state) {
+        $currencies = CurrenciesApiService::makeRequest('GET', 'currencies');
+
+        $currencies_list = [];
+        foreach ($currencies as $currency) {
+            $currencies_list[$currency->code] = $currency->name;
+        }
+        $config = $this->config('currencies_list.currencies_list');
+
+        $form['available_currencies'] = [
+            '#type' => 'select',
+            '#title' => $this->t('Currencies'),
+            '#options' => $currencies_list,
+            '#default_value' => $config->get('available_currencies'),
+            '#required' => TRUE,
+            '#multiple' => TRUE,
+        ];
+
+        return parent::buildForm(
+            $form, $form_state
+        );
+    }
+
+    public function submitForm(array &$form, FormStateInterface $form_state) {
+        $currencies = $form_state->getValue('available_currencies');
+        $this->config('currencies_list.currencies_list')
+            ->set('available_currencies', $currencies)
+            ->save();
+
+        CurrenciesApiService::updateRates();
+        parent::submitForm(
+            $form, $form_state
+        );
     }
 }

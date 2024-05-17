@@ -1,10 +1,14 @@
 currencies_list.settings:
-  title: 'Api Key'
+  title: 'Api Settings'
   route_name: currencies_list.settings.config
   parent: system.admin_config_currencies_list
 currencies_list.currencies:
   title: 'Available currencies'
   route_name: currencies_list.settings.currencies
+  parent: system.admin_config_currencies_list
+currencies_list.currencies.converted:
+  title: 'List of currencies with rates'
+  route_name: currencies_list.settings.currencies.converted
   parent: system.admin_config_currencies_list
 system.admin_config_currencies_list:
   route_name: system.admin_config_currencies_list

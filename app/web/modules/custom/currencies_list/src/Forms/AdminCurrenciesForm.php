@@ -34,6 +34,14 @@ class AdminCurrenciesForm extends ConfigFormBase
                 'Enter the API key used to access the currencies list. Please get an API key at <a href="https://freecurrencyapi.com">freecurrencyapi.com</a>.'
             ),
         ];
+        $form['api_url'] = [
+            '#type'          => 'textfield',
+            '#title'         => $this->t('API URL'),
+            '#default_value' => $config->get('api_url'),
+            '#required'      => true,
+            '#description'   => $this->t("Ente the base API endpoint URL."),
+            '#weight'        => -1,
+        ];
 
         return parent::buildForm(
             $form, $form_state
@@ -47,6 +55,9 @@ class AdminCurrenciesForm extends ConfigFormBase
     {
         $this->config('currencies_list.currencies_list')->set(
             'api_key', $form_state->getValue('api_key')
+        )->save();
+        $this->config('currencies_list.currencies_list')->set(
+            'api_url', $form_state->getValue('api_url')
         )->save();
         parent::submitForm(
             $form, $form_state

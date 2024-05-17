@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\currencies_list\Services\CurrenciesApiService;
 
 function currencies_list_help(string $route_name, RouteMatchInterface $route_match) {
     switch ($route_name) {
@@ -9,4 +10,8 @@ function currencies_list_help(string $route_name, RouteMatchInterface $route_mat
             return $output;
         default:
     }
+}
+
+function currencies_list_cron() {
+    CurrenciesApiService::updateRates();
 }
